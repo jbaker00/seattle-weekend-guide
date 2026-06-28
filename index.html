@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seattle Weekend Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .filter-title {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        button.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 1;
+            max-height: 500px;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .activity-card.hidden {
+            display: none;
+        }
+
+        .card-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .card-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e8eaf6;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .tag.introvert {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .tag.extrovert {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .card-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 10px 0;
+        }
+
+        .card-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .no-results {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌲 Seattle Weekend Guide</h1>
+            <p class="subtitle">Perfect activities for your cousins' visit</p>
+        </header>
+
+        <div class="filter-section">
+            <div class="filter-title">Filter by Vibe:</div>
+            <div class="button-group">
+                <button class="filter-btn active" data-filter="all">Show All</button>
+                <button class="filter-btn" data-filter="introvert">🧘 Introvert Vibes</button>
+                <button class="filter-btn" data-filter="extrovert">🎉 Extrovert Vibes</button>
+                <button class="filter-btn" data-filter="both">👥 Great for Both</button>
+            </div>
+        </div>
+
+        <div class="activities-grid" id="activitiesGrid"></div>
+
+        <div class="footer">
+            <p>Built with 💜 for a Seattle adventure • Have fun!</p>
+        </div>
+    </div>
+
+    <script>
+        const activities = [
+            {
+                title: "Pike Place Market",
+                emoji: "🐟",
+                description: "Iconic Seattle market with fresh flowers, seafood, crafts, and street performers. Great for people-watching and grabbing lunch.",
+                tags: ["both", "food", "arts"],
+                vibe: "both",
+                link: "https://pikeplacemarket.com"
+            },
+            {
+                title: "Seattle Art Museum (SAM)",
+                emoji: "🎨",
+                description: "World-class contemporary and Native American art. Perfect for the art lover. Peaceful galleries and inspiring collections.",
+                tags: ["introvert", "arts"],
+                vibe: "introvert",
+                link: "https://www.seattleartmuseum.org"
+            },
+            {
+                title: "Discovery Park & Lighthouse",
+                emoji: "🏞️",
+                description: "Seattle's largest park with stunning water views, hiking trails, and the iconic lighthouse. Peaceful and beautiful.",
+                tags: ["introvert", "outdoors"],
+                vibe: "introvert",
+                link: "https://www.seattle.gov/parks/find-a-park/discovery-park"
+            },
+            {
+                title: "Capitol Hill Neighborhood",
+                emoji: "🎭",
+                description: "Vibrant neighborhood with indie bookstores, vintage shops, live music venues, and quirky cafes. Perfect for exploring and socializing.",
+                tags: ["extrovert", "arts", "food"],
+                vibe: "extrovert",
+                link: "https://www.capitolhillseattle.com"
+            },
+            {
+                title: "Volunteer Park & Water Tower",
+                emoji: "🗼",
+                description: "Beautiful park with panoramic city views from the water tower. Great for a peaceful walk or picnic with stunning photo ops.",
+                tags: ["introvert", "outdoors"],
+                vibe: "introvert",
+                link: "https://www.seattle.gov/parks/find-a-park/volunteer-park"
+            },
+            {
+                title: "Chihuly Garden and Glass",
+                emoji: "🌺",
+                description: "Stunning glass sculpture museum with interactive gardens. A dreamlike experience for art lovers. Book tickets ahead!",
+                tags: ["introvert", "arts"],
+                vibe: "introvert",
+                link: "https://www.chihulygardenandglass.com"
+            },
+            {
+                title: "Ballard Neighborhood Tour",
+                emoji: "🍺",
+                description: "Historic Scandinavian neighborhood with breweries, restaurants, vintage shops, and weekend markets. Fun, walkable, social.",
+                tags: ["extrovert", "food"],
+                vibe: "extrovert",
+                link: "https://www.exploreballard.com"
+            },
+            {
+                title: "Seattle Central Library",
+                emoji: "📚",
+                description: "Architecturally stunning building with beautiful design, quiet reading spaces, and amazing views. Peaceful and inspiring.",
+                tags: ["introvert", "arts"],
+                vibe: "introvert",
+                link: "https://www.spl.org/locations-and-hours/central-library"
+            },
+            {
+                title: "Museum of Pop Culture",
+                emoji: "🎸",
+                description: "Interactive museum celebrating music, film, and pop culture. Engaging exhibits and hands-on experiences. Fun for all!",
+                tags: ["both", "arts"],
+                vibe: "both",
+                link: "https://www.mopop.org"
+            },
+            {
+                title: "Kerry Park Viewpoint",
+                emoji: "🌃",
+                description: "Best sunset views in Seattle with Space Needle, downtown, and mountains. Perfect for photos and quiet reflection.",
+                tags: ["introvert", "outdoors"],
+                vibe: "introvert",
+                link: "https://www.seattle.gov/parks/find-a-park/kerry-park"
+            },
+            {
+                title: "Live Music & Nightlife",
+                emoji: "🎤",
+                description: "Seattle has an incredible live music scene! Check out Neumos, Paramount, or neighborhood venues. Jazz, indie, everything.",
+                tags: ["extrovert", "arts", "food"],
+                vibe: "extrovert",
+                link: "https://www.seattlepi.com/entertainment/live-music"
+            },
+            {
+                title: "Green Lake Walk & Paddle",
+                emoji: "🚣",
+                description: "3-mile scenic walk around the lake, or rent a kayak/paddleboard. Great for conversation or solo reflection.",
+                tags: ["both", "outdoors"],
+                vibe: "both",
+                link: "https://www.seattle.gov/parks/find-a-park/green-lake-park"
+            },
+            {
+                title: "Fremont Neighborhood",
+                emoji: "🎨",
+                description: "Quirky, artsy neighborhood with street art, weekend markets, vintage shops, and eclectic cafes. Fun and creative energy.",
+                tags: ["extrovert", "arts"],
+                vibe: "extrovert",
+                link: "https://www.fremontseattle.com"
+            },
+            {
+                title: "Washington Park Arboretum",
+                emoji: "🌳",
+                description: "200 acres of beautiful gardens and trails. Peaceful, serene, perfect for a quiet day in nature.",
+                tags: ["introvert", "outdoors"],
+                vibe: "introvert",
+                link: "https://botanicgardens.uw.edu"
+            },
+            {
+                title: "Day Trip: Mount Rainier",
+                emoji: "⛰️",
+                description: "Stunning national park 2 hours away. Hiking, scenic drives, wildflowers. Epic day trip for nature lovers.",
+                tags: ["both", "outdoors"],
+                vibe: "both",
+                link: "https://www.nps.gov/mora"
+            },
+            {
+                title: "Coffee Culture Tour",
+                emoji: "☕",
+                description: "Seattle's famous for coffee! Visit indie roasters like Slate, Caffe Vita, or specialty shops. Perfect for a cozy morning.",
+                tags: ["introvert", "food"],
+                vibe: "introvert",
+                link: "https://www.seattlecoffeeguide.com"
+            },
+            {
+                title: "Community Service Activity",
+                emoji: "🤝",
+                description: "For the social worker! Check out Seattle community centers, food banks, or volunteer opportunities. Make a real impact.",
+                tags: ["extrovert", "community"],
+                vibe: "extrovert",
+                link: "https://www.seattle.gov/human-services/find-services-and-help"
+            },
+            {
+                title: "Waterfront Stroll & Aquarium",
+                emoji: "🦑",
+                description: "Walk the scenic waterfront, visit Pike Place, or check out the Seattle Aquarium. Dynamic and engaging.",
+                tags: ["both", "food"],
+                vibe: "both",
+                link: "https://www.seattleaquarium.org"
+            }
+        ];
+
+        const grid = document.getElementById('activitiesGrid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        function renderActivities(filter = 'all') {
+            grid.innerHTML = '';
+            let visibleCount = 0;
+
+            activities.forEach(activity => {
+                if (filter === 'all' || activity.vibe === filter) {
+                    visibleCount++;
+                    const card = document.createElement('div');
+                    card.className = 'activity-card';
+                    card.innerHTML = `
+                        <div class="card-image">${activity.emoji}</div>
+                        <div class="card-content">
+                            <h2 class="card-title">${activity.title}</h2>
+                            <p class="card-description">${activity.description}</p>
+                            <div class="card-tags">
+                                ${activity.tags.map(tag => {
+                                    let tagClass = '';
+                                    if (tag === 'introvert') tagClass = 'introvert';
+                                    if (tag === 'extrovert') tagClass = 'extrovert';
+                                    return `<span class="tag ${tagClass}">${capitalizeTag(tag)}</span>`;
+                                }).join('')}
+                            </div>
+                            <a href="${activity.link}" target="_blank" class="card-link">Learn More →</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+
+            if (visibleCount === 0) {
+                grid.innerHTML = '<div class="no-results">No activities found for this vibe. Try a different filter!</div>';
+            }
+        }
+
+        function capitalizeTag(tag) {
+            const tagNames = {
+                'introvert': '🧘 Introvert Friendly',
+                'extrovert': '🎉 Extrovert Friendly',
+                'arts': '🎨 Arts',
+                'food': '🍽️ Food',
+                'outdoors': '🌲 Outdoors',
+                'community': '🤝 Community'
+            };
+            return tagNames[tag] || tag;
+        }
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderActivities(btn.dataset.filter);
+            });
+        });
+
+        renderActivities();
+    </script>
+</body>
+</html>
