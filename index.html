@@ -119,6 +119,8 @@
             justify-content: center;
             font-size: 4rem;
             color: white;
+            background-size: cover;
+            background-position: center;
         }
 
         .card-content {
@@ -241,7 +243,7 @@
         const activities = [
             {
                 title: "Pike Place Market",
-                emoji: "🐟",
+                image: "https://images.unsplash.com/photo-1553531088-b95f38b8b58a?w=500&h=300&fit=crop",
                 description: "Iconic Seattle market with fresh flowers, seafood, crafts, and street performers. Great for people-watching and grabbing lunch.",
                 tags: ["both", "food", "arts"],
                 vibe: "both",
@@ -249,7 +251,7 @@
             },
             {
                 title: "Seattle Art Museum (SAM)",
-                emoji: "🎨",
+                image: "https://images.unsplash.com/photo-1564399579883-451a5b1f5c4b?w=500&h=300&fit=crop",
                 description: "World-class contemporary and Native American art. Perfect for the art lover. Peaceful galleries and inspiring collections.",
                 tags: ["introvert", "arts"],
                 vibe: "introvert",
@@ -257,7 +259,7 @@
             },
             {
                 title: "Discovery Park & Lighthouse",
-                emoji: "🏞️",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop",
                 description: "Seattle's largest park with stunning water views, hiking trails, and the iconic lighthouse. Peaceful and beautiful.",
                 tags: ["introvert", "outdoors"],
                 vibe: "introvert",
@@ -265,7 +267,7 @@
             },
             {
                 title: "Capitol Hill Neighborhood",
-                emoji: "🎭",
+                image: "https://images.unsplash.com/photo-1540575467063-178f50902556?w=500&h=300&fit=crop",
                 description: "Vibrant neighborhood with indie bookstores, vintage shops, live music venues, and quirky cafes. Perfect for exploring and socializing.",
                 tags: ["extrovert", "arts", "food"],
                 vibe: "extrovert",
@@ -273,7 +275,7 @@
             },
             {
                 title: "Volunteer Park & Water Tower",
-                emoji: "🗼",
+                image: "https://images.unsplash.com/photo-1502931091726-8d999f51f397?w=500&h=300&fit=crop",
                 description: "Beautiful park with panoramic city views from the water tower. Great for a peaceful walk or picnic with stunning photo ops.",
                 tags: ["introvert", "outdoors"],
                 vibe: "introvert",
@@ -281,7 +283,7 @@
             },
             {
                 title: "Chihuly Garden and Glass",
-                emoji: "🌺",
+                image: "https://images.unsplash.com/photo-1578608619892-f87a6bb4f2e3?w=500&h=300&fit=crop",
                 description: "Stunning glass sculpture museum with interactive gardens. A dreamlike experience for art lovers. Book tickets ahead!",
                 tags: ["introvert", "arts"],
                 vibe: "introvert",
@@ -289,7 +291,7 @@
             },
             {
                 title: "Ballard Neighborhood Tour",
-                emoji: "🍺",
+                image: "https://images.unsplash.com/photo-1608576642766-3f0295df271f?w=500&h=300&fit=crop",
                 description: "Historic Scandinavian neighborhood with breweries, restaurants, vintage shops, and weekend markets. Fun, walkable, social.",
                 tags: ["extrovert", "food"],
                 vibe: "extrovert",
@@ -297,7 +299,7 @@
             },
             {
                 title: "Seattle Central Library",
-                emoji: "📚",
+                image: "https://images.unsplash.com/photo-150784272343-583f20917031?w=500&h=300&fit=crop",
                 description: "Architecturally stunning building with beautiful design, quiet reading spaces, and amazing views. Peaceful and inspiring.",
                 tags: ["introvert", "arts"],
                 vibe: "introvert",
@@ -305,7 +307,7 @@
             },
             {
                 title: "Museum of Pop Culture",
-                emoji: "🎸",
+                image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop",
                 description: "Interactive museum celebrating music, film, and pop culture. Engaging exhibits and hands-on experiences. Fun for all!",
                 tags: ["both", "arts"],
                 vibe: "both",
@@ -313,7 +315,7 @@
             },
             {
                 title: "Kerry Park Viewpoint",
-                emoji: "🌃",
+                image: "https://images.unsplash.com/photo-1527482797697-8795b1a55a45?w=500&h=300&fit=crop",
                 description: "Best sunset views in Seattle with Space Needle, downtown, and mountains. Perfect for photos and quiet reflection.",
                 tags: ["introvert", "outdoors"],
                 vibe: "introvert",
@@ -321,7 +323,7 @@
             },
             {
                 title: "Live Music & Nightlife",
-                emoji: "🎤",
+                image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop",
                 description: "Seattle has an incredible live music scene! Check out Neumos, Paramount, or neighborhood venues. Jazz, indie, everything.",
                 tags: ["extrovert", "arts", "food"],
                 vibe: "extrovert",
@@ -329,7 +331,7 @@
             },
             {
                 title: "Green Lake Walk & Paddle",
-                emoji: "🚣",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop",
                 description: "3-mile scenic walk around the lake, or rent a kayak/paddleboard. Great for conversation or solo reflection.",
                 tags: ["both", "outdoors"],
                 vibe: "both",
@@ -337,7 +339,7 @@
             },
             {
                 title: "Fremont Neighborhood",
-                emoji: "🎨",
+                image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop",
                 description: "Quirky, artsy neighborhood with street art, weekend markets, vintage shops, and eclectic cafes. Fun and creative energy.",
                 tags: ["extrovert", "arts"],
                 vibe: "extrovert",
@@ -345,7 +347,7 @@
             },
             {
                 title: "Washington Park Arboretum",
-                emoji: "🌳",
+                image: "https://images.unsplash.com/photo-1505228395891-9a51e7e86e81?w=500&h=300&fit=crop",
                 description: "200 acres of beautiful gardens and trails. Peaceful, serene, perfect for a quiet day in nature.",
                 tags: ["introvert", "outdoors"],
                 vibe: "introvert",
@@ -353,7 +355,7 @@
             },
             {
                 title: "Day Trip: Mount Rainier",
-                emoji: "⛰️",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop",
                 description: "Stunning national park 2 hours away. Hiking, scenic drives, wildflowers. Epic day trip for nature lovers.",
                 tags: ["both", "outdoors"],
                 vibe: "both",
@@ -361,7 +363,7 @@
             },
             {
                 title: "Coffee Culture Tour",
-                emoji: "☕",
+                image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=300&fit=crop",
                 description: "Seattle's famous for coffee! Visit indie roasters like Slate, Caffe Vita, or specialty shops. Perfect for a cozy morning.",
                 tags: ["introvert", "food"],
                 vibe: "introvert",
@@ -369,7 +371,7 @@
             },
             {
                 title: "Community Service Activity",
-                emoji: "🤝",
+                image: "https://images.unsplash.com/photo-1559027615-cd2628902d4a?w=500&h=300&fit=crop",
                 description: "For the social worker! Check out Seattle community centers, food banks, or volunteer opportunities. Make a real impact.",
                 tags: ["extrovert", "community"],
                 vibe: "extrovert",
@@ -377,7 +379,7 @@
             },
             {
                 title: "Waterfront Stroll & Aquarium",
-                emoji: "🦑",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop",
                 description: "Walk the scenic waterfront, visit Pike Place, or check out the Seattle Aquarium. Dynamic and engaging.",
                 tags: ["both", "food"],
                 vibe: "both",
@@ -398,7 +400,7 @@
                     const card = document.createElement('div');
                     card.className = 'activity-card';
                     card.innerHTML = `
-                        <div class="card-image">${activity.emoji}</div>
+                        <div class="card-image" style="background-image: url('${activity.image}');"></div>
                         <div class="card-content">
                             <h2 class="card-title">${activity.title}</h2>
                             <p class="card-description">${activity.description}</p>
